@@ -4,11 +4,20 @@ import { Controller, Get } from '@nestjs/common';
 
 export class FacturacionController {
 
-    @Get()
-    calcularNumero() {
+    /*@Get()
+    obtenerMarcas() {
         const make = [
             "Mazda", "Toyota", "BMW"
         ]
         return make
+    }*/
+
+    @Get()
+    obtenerPlacas(){
+        const placas = [
+            'PRX-7845','CHC-'
+        ]
+        return placas
     }
+
 }
