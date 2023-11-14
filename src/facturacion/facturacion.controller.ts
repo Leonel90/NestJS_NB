@@ -6,7 +6,7 @@ import { FacturacionService } from './facturacion.service';
 export class FacturacionController {
 
 
-    constructor(private facturacionService:FacturacionService){
+    constructor(private facturacionService: FacturacionService){
         
     }
     /*@Get()

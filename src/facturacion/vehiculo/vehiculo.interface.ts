@@ -1,5 +1,6 @@
-export interface Factura {
+export interface Vehiculo {
     id: number;
     nombre: string;
+    placa: string;
     detalle: string;
 }

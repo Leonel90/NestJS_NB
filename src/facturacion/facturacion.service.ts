@@ -1,23 +1,23 @@
 import { Get, Injectable, NotFoundException, Param } from '@nestjs/common';
-import { Factura } from './Interfaces/facturacion';
+import { Vehiculo } from './vehiculo/vehiculo.interface';
 
 @Injectable()
 export class FacturacionService {
 
-    private Placa: Factura[] = [
-        { id: 1, nombre: 'TDR-4578', detalle: 'Placas nuevas' },
-        { id: 2, nombre: 'PHC-4512', detalle: 'Cambio de plcas' },
-        { id: 3, nombre: 'RQT-4512', detalle: 'Requiere placas' }
+    private dato: Vehiculo[] = [
+        { id: 1, nombre: 'Audi', placa: 'TPC-7845', detalle: 'Placas nuevas' },
+        { id: 2, nombre: 'Camaro', placa: 'PCH-5623', detalle: 'Cambio de plcas' },
+        { id: 3, nombre: 'BMW', placa: 'CHT-4518', detalle: 'Requiere placas' }
     ];
 
     getAll() {
-        return this.Placa;
+        return this.dato;
     }
 
     getById(@Param('id') id: number) {
-        let dato = this.Placa.find(placas => placas.id === id);
-        if (!dato)
+        let datosVehiculo = this.dato.find(placas => placas.id === id);
+        if (!datosVehiculo)
             throw new NotFoundException("NO existe registro solicitado")
-        return dato;
+        return datosVehiculo;
     }
 }
