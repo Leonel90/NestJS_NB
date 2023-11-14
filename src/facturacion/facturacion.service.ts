@@ -1,4 +1,4 @@
-import { Get, Injectable, NotFoundException, Param } from '@nestjs/common';
+import { Injectable, NotFoundException, Param } from '@nestjs/common';
 import { Vehiculo } from './vehiculo/vehiculo.interface';
 
 @Injectable()
@@ -19,5 +19,38 @@ export class FacturacionService {
         if (!datosVehiculo)
             throw new NotFoundException("NO existe registro solicitado")
         return datosVehiculo;
+    }
+
+    insert(body: any) {
+        this.dato = [
+            ...this.dato,
+            {
+                id: this.lastId() + 1,
+                nombre: body.nombre,
+                placa: body.placa,
+                detalle: body.detalle
+            }
+        ];
+    }
+
+    update(id: number, body: any) {
+        let vehiculo: Vehiculo = {
+            id,
+            nombre: body.nombre,
+            placa: body.placa,
+            detalle: body.detalle,
+        }
+        this.dato = this.dato.map((item: Vehiculo) => {
+            console.log(item, id, item.id == id);
+            return item.id == id ? vehiculo : item;
+        });
+    }
+
+    delete(@Param('id') id: number) {
+        this.dato = this.dato.filter((item: Vehiculo) => item.id != id);
+    }
+
+    private lastId(): number {
+        return this.dato[this.dato.length - 1].id
     }
 }
