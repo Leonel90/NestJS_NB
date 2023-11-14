@@ -1,9 +1,14 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe } from '@nestjs/common';
+import { FacturacionService } from './facturacion.service';
 
 @Controller('facturacion')
 
 export class FacturacionController {
 
+
+    constructor(private facturacionService:FacturacionService){
+        
+    }
     /*@Get()
     obtenerMarcas() {
         const make = [
@@ -11,16 +16,16 @@ export class FacturacionController {
         ]
         return make
     }*/
-    private placas = ['PRX-7845','CHC-7859','TRC-7895'];
+
     @Get()
-    getPlacas(){
-        return this.placas;
+    getAllPlacas(){
+        return this.facturacionService.getAll();
     }
+
     // para llamar por un id especifico
     @Get(':id')
-    
-    getById(@Param('id') id: string){
+    getById(@Param('id', ParseIntPipe) id: number){
         //return {id};// llamar numero de id
-        return this.placas[id];// llamar nombre del dato
+        return this.facturacionService.getById(id);// llamar nombre del dato con el + para trasnformar a string
     }
 }
