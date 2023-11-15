@@ -1,13 +1,14 @@
 import { Injectable, NotFoundException, Param } from '@nestjs/common';
 import { Vehiculo } from './vehiculo/vehiculo.interface';
+import { v4 as uuid } from 'uuid';
 
 @Injectable()
 export class FacturacionService {
 
     private dato: Vehiculo[] = [
-        { id: 1, nombre: 'Audi', placa: 'TPC-7845', detalle: 'Placas nuevas' },
-        { id: 2, nombre: 'Camaro', placa: 'PCH-5623', detalle: 'Cambio de plcas' },
-        { id: 3, nombre: 'BMW', placa: 'CHT-4518', detalle: 'Requiere placas' }
+        { id: uuid(), nombre: 'Audi', placa: 'TPC-7845', detalle: 'Placas nuevas' },
+        { id: uuid(), nombre: 'Camaro', placa: 'PCH-5623', detalle: 'Cambio de plcas' },
+        { id: uuid(), nombre: 'BMW', placa: 'CHT-4518', detalle: 'Requiere placas' }
     ];
 
     getAll() {
@@ -25,7 +26,7 @@ export class FacturacionService {
         this.dato = [
             ...this.dato,
             {
-                id: this.lastId() + 1,
+                id: uuid(),
                 nombre: body.nombre,
                 placa: body.placa,
                 detalle: body.detalle
@@ -48,9 +49,5 @@ export class FacturacionService {
 
     delete(@Param('id') id: number) {
         this.dato = this.dato.filter((item: Vehiculo) => item.id != id);
-    }
-
-    private lastId(): number {
-        return this.dato[this.dato.length - 1].id
     }
 }

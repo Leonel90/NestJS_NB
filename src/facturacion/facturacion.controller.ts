@@ -1,5 +1,6 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put, UsePipes, ValidationPipe } from '@nestjs/common';
 import { FacturacionService } from './facturacion.service';
+import { CreateFacturaDto } from './dto/create-facturacion.dto';
 
 @Controller('facturacion')
 
@@ -22,11 +23,12 @@ export class FacturacionController {
     }
 
     @Post()
-    @HttpCode(HttpStatus.NO_CONTENT)
+    //@HttpCode(HttpStatus.NO_CONTENT)
     createVehiculo(
-        @Body() body,
+        @Body() body:CreateFacturaDto,
     ) {
-        this.facturacionService.insert(body);
+        //this.facturacionService.insert(body);
+        return body
     }
 
     @Put(':id')
